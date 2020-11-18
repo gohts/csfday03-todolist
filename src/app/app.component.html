@@ -1,52 +1,63 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col">
-      <h1>To-Do</h1>
+  <div class="row pt-5">
+    <div class="col-6">
+      <h1 class="text-warning font-weight-bold">To-Do</h1>
 
-      <!-- Beginning of form group -->
       <form [formGroup]="todoForm" (ngSubmit)="processForm()">
-
-        <label for="description">Description:
-          <input type="text" formControlName="description">
-        </label>
-        <br>
-
-        <label for="priority">Priority:
-          <input type="radio" formControlName="priority" value="High"> High
-          <input type="radio" formControlName="priority" value="Medium"> Medium
-          <input type="radio" formControlName="priority" value="Low"> Low
-        </label>
-        <br>
-
-        <label for="dueDate">Due:
-          <input type="date" formControlName="dueDate">
-        </label>
-        <div *ngIf="todoForm.get('dueDate').hasError('dueDateInvalid')" class="text-danger">Due date invalid!</div>
-        <br>
-
-        <button type="submit" [disabled]="todoForm.invalid">Add</button>
-
+        <table class="table table-borderless">
+          <tr>
+            <td class="align-middle">
+              <label class="float-right" for="description">Description:
+              </label>
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="description">
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <label class="float-right" for="priority">Priority:
+              </label>
+            </td>
+            <td>
+              <input type="radio" formControlName="priority" value="High"> High
+              <input type="radio" formControlName="priority" value="Medium"> Medium
+              <input type="radio" formControlName="priority" value="Low"> Low
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <label class="float-right" for="dueDate">Due:
+              </label>
+            </td>
+            <td>
+              <input type="date"  class="form-control"  formControlName="dueDate">
+              <div *ngIf="todoForm.get('dueDate').hasError('dueDateInvalid')" class="font-italic text-danger small">Due date invalid!</div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="float-left">        
+              <button class = "btn btn-primary btn-sm float-right" type="submit" mat-raised-button color="accent" [disabled]="todoForm.invalid" >Add</button>
+            </td>
+          </tr>
+        </table>
       </form>
-      <!-- Ending of form group -->
-      
     </div>
   </div>
 
-  <hr>
-
-  <div class="row">
+  <div class="row pt-5">
     <div class="col">
-      <h1>Tasks</h1>
-      <table>
-        <tr *ngFor="let task of tasks">
-          <td>
-            {{task.description}}<br>
-            {{task.priority}}<br>
-            {{task.dueDate}}<br>
-          </td>
-        </tr>
-      </table>
+      <h1 class="text-warning font-weight-bold">Tasks</h1>
+
+      <div class="card mt-2" *ngFor="let task of tasks" style="width: 20rem;">
+        <div class="card-body align-justify">
+          <h2 class="text-secondary">{{task.description}}</h2>
+          <span class="font-italic text-info"><small>{{task.priority}}</small></span>
+          <span class="float-right font-italic text-info"><small>{{task.dueDate}}</small></span>
+        </div>
+      </div>
     </div>
   </div>
 
